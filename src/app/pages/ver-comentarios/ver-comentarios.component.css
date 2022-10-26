@@ -1,0 +1,22 @@
+.very-positive {
+    background-color: #488D3D;
+}
+.positive {
+    background-color: #ADC334;
+}
+.very-negative {
+    background-color: red;
+}
+.negative {
+    background-color: #E46423;
+}
+.neutral {
+    background-color: #FEDA00;
+}
+.none    {
+    background-color: gray;
+}
+
+h2{
+    cursor: pointer;
+}

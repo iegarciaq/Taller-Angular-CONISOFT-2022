@@ -1,0 +1,61 @@
+<form [formGroup]="formulario">
+    <div class="mt-3">
+        <label class="form-label">Selecciona una carrera</label>
+        <select formControlName="carrera" (change)="onChange()" class="form-select border border-2 border-dark"
+            required>
+            <option value="TSU_MECA">Técnico Superior Universitario en Mecatrónica: Área Robótica</option>
+            <option value="TSU_DSM">Técnico Superior Universitario en TICs: Área Desarrollo de Software Multiplataforma
+            </option>
+            <option value="TSU_AUTO">Técnico Superior Universitario en Procesos Industriales: Area Automotriz</option>
+            <option value="I_MECA">Ingeniería Mecatrónica</option>
+            <option value="I_DGS">Ingeniería en Desarrollo y Gestión de Software</option>
+            <option value="I_IND">Ingeniería Industrial</option>
+        </select>
+    </div>
+</form>
+
+<div class="accordion mt-3" id="accordionExample">
+    <div *ngFor="let sentiment of arregloComentarios; let i = index" class="card my-2">
+        <div class="card-header" [ngClass]="{
+            'very-positive': sentiment.id == 'P+',
+                'positive': sentiment.id == 'P',
+                'very-negative': sentiment.id == 'N+',
+                'negative': sentiment.id == 'N',
+                'neutral': sentiment.id == 'NEU',
+                'none': sentiment.id == 'NONE' || sentiment.id == ''
+        }" id="headingOne">
+            <h2 class="mb-0" (click)="sentiment.collapse = !sentiment.collapse">
+                <small>
+                    <span class="badge badge-primary text-dark">
+                        {{sentiment.comentarios.length}}
+                    </span>
+                </small>
+                <small class="fs-5">{{
+                    sentiment.id == "N"
+                      ? "Negativo"
+                      : sentiment.id == "P"
+                      ? "Positivo"
+                      : sentiment.id == "P+"
+                      ? "Muy Positivo"
+                      : sentiment.id == "N+"
+                      ? "Muy Negativo"
+                      : sentiment.id == "NEU"
+                      ? "Neutral"
+                      : sentiment.id == "NONE"
+                      ? "Sin sentimiento"
+                      : "Sin clasificación"
+                  }}</small>
+            </h2>
+        </div>
+        <div id="{{ sentiment.id }}" class="collapse" [ngClass]="{ show: sentiment.collapse }"
+            data-parent="#accordionExample">
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li *ngFor="let item of sentiment.comentarios" class="list-group-item">
+                        {{ item }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
